@@ -1,0 +1,4 @@
+recent-comments-reactive:
+  version: VERSION
+  js:
+    js/dist/health-check.js: {}

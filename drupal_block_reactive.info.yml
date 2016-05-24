@@ -1,0 +1,8 @@
+name: Recent comments (React)
+type: module
+description: 'Showing latest comments in a reactive way.'
+package: Development
+version: '8.x-1.x-dev'
+core: '8.x'
+dependencies:
+  - block
