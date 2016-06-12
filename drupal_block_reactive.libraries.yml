@@ -13,4 +13,6 @@ recent-comments-reactive.reactjs:
 recent-comments-reactive.component:
   version: VERSION
   js:
-    js/dist/hello.js: {}
+    js/dist/index.js: {}
+  dependencies:
+    - core/drupal
