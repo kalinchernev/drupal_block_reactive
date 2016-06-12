@@ -8,6 +8,11 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+/**
+ * @file
+ * Attaching React component via Drupal behaviors..
+ */
+
 Drupal.behaviors.drupal_block_reactive = {
   attach: function attach(context) {
     // CommentBox component definition.
@@ -29,23 +34,24 @@ Drupal.behaviors.drupal_block_reactive = {
       _createClass(CommentBox, [{
         key: 'componentDidMount',
         value: function componentDidMount() {
+          this._fetchData();
+          setInterval(this.fetchData, 2000);
+        }
+      }, {
+        key: '_fetchData',
+        value: function _fetchData() {
           var _this2 = this;
 
-          this.serverRequest = jQuery.ajax({
-            url: '/api/comments',
+          jQuery.ajax({
+            url: this.props.url,
             dataType: 'json',
             success: function success(comments) {
               _this2.setState({ comments: comments });
             },
             error: function error(xhr, status, err) {
-              console.error('/api/comments', status, err.toString());
+              console.error(_this2.props.url, status, err.toString());
             }
           });
-        }
-      }, {
-        key: 'componentWillUnmount',
-        value: function componentWillUnmount() {
-          this.serverRequest.abort();
         }
 
         // Private method gets data from state and returns array of components.
@@ -124,6 +130,6 @@ Drupal.behaviors.drupal_block_reactive = {
     // Render our component.
 
 
-    ReactDOM.render(React.createElement(CommentBox, null), document.getElementById('recent-comments-react'));
+    ReactDOM.render(React.createElement(CommentBox, { url: '/api/comments' }), document.getElementById('recent-comments-react'));
   }
 };

@@ -1,3 +1,8 @@
+/**
+ * @file
+ * Attaching React component via Drupal behaviors..
+ */
+
 Drupal.behaviors.drupal_block_reactive = {
   attach: (context) => {
     // CommentBox component definition.
@@ -10,20 +15,21 @@ Drupal.behaviors.drupal_block_reactive = {
       }
 
       componentDidMount() {
-        this.serverRequest = jQuery.ajax({
-          url: '/api/comments',
+        this._fetchData();
+        setInterval(this.fetchData, 2000);
+      }
+
+      _fetchData() {
+        jQuery.ajax({
+          url: this.props.url,
           dataType: 'json',
           success: (comments) => {
             this.setState({comments});
           },
           error: (xhr, status, err) => {
-            console.error('/api/comments', status, err.toString());
+            console.error(this.props.url, status, err.toString());
           }
         });
-      }
-
-      componentWillUnmount() {
-        this.serverRequest.abort();
       }
 
       // Private method gets data from state and returns array of components.
@@ -65,7 +71,7 @@ Drupal.behaviors.drupal_block_reactive = {
     }
     // Render our component.
     ReactDOM.render(
-      <CommentBox />,
+      <CommentBox url='/api/comments' />,
       document.getElementById('recent-comments-react')
     );
   }
