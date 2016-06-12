@@ -30,14 +30,10 @@ Drupal.behaviors.drupal_block_reactive = {
         };
         return _this;
       }
+      // Data from a service.
+
 
       _createClass(CommentBox, [{
-        key: 'componentDidMount',
-        value: function componentDidMount() {
-          this._fetchData();
-          setInterval(this._fetchData, this.props.timeInterval);
-        }
-      }, {
         key: '_fetchData',
         value: function _fetchData() {
           var _this2 = this;
@@ -54,7 +50,7 @@ Drupal.behaviors.drupal_block_reactive = {
           });
         }
 
-        // Private method gets data from state and returns array of components.
+        // Gets data from state, returns a list components.
 
       }, {
         key: '_getComments',
@@ -78,13 +74,19 @@ Drupal.behaviors.drupal_block_reactive = {
           );
         }
       }, {
+        key: 'componentDidMount',
+        value: function componentDidMount() {
+          this._fetchData();
+          setInterval(this._fetchData.bind(this), this.props.timeInterval);
+        }
+      }, {
         key: 'render',
         value: function render() {
-          var comments = this._getComments();
+          var commentsNodes = this._getComments();
           return React.createElement(
             'div',
             { className: 'comments' },
-            comments
+            commentsNodes
           );
         }
       }]);

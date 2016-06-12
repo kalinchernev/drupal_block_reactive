@@ -13,12 +13,7 @@ Drupal.behaviors.drupal_block_reactive = {
           comments: []
         }
       }
-
-      componentDidMount() {
-        this._fetchData();
-        setInterval(this._fetchData, this.props.timeInterval);
-      }
-
+      // Data from a service.
       _fetchData() {
         jQuery.ajax({
           url: this.props.url,
@@ -30,7 +25,7 @@ Drupal.behaviors.drupal_block_reactive = {
         });
       }
 
-      // Private method gets data from state and returns array of components.
+      // Gets data from state, returns a list components.
       _getComments() {
         // Get the list of comments from the state.
         const commentsList = this.state.comments;
@@ -49,10 +44,17 @@ Drupal.behaviors.drupal_block_reactive = {
         );
       }
 
+      componentDidMount() {
+        this._fetchData();
+        setInterval(this._fetchData.bind(this), this.props.timeInterval);
+      }
+
       render() {
-        const comments = this._getComments();
+        const commentsNodes = this._getComments();
         return (
-          <div className="comments">{comments}</div>
+          <div className="comments">
+            {commentsNodes}
+          </div>
         );
       }
     }
