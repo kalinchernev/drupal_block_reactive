@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -10,7 +10,6 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 Drupal.behaviors.drupal_block_reactive = {
   attach: function attach(context) {
-
     // CommentBox component definition.
 
     var CommentBox = function (_React$Component) {
@@ -23,13 +22,17 @@ Drupal.behaviors.drupal_block_reactive = {
       }
 
       _createClass(CommentBox, [{
-        key: 'render',
+        key: "render",
         value: function render() {
-          var comments = [{ title: 'one', date: Date(), key: 1 }, { title: 'two', date: Date(), key: 2 }];
+          var commentsList = [{ title: "one", date: Date(), id: '223' }, { title: "two", date: Date(), id: '224' }];
+          var comments = commentsList.map(function (comment) {
+            return React.createElement(Comment, { title: comment.title, date: comment.date, key: comment.id });
+          });
+
           return React.createElement(
-            'div',
-            { className: 'commentBox' },
-            React.createElement(CommentList, { comments: comments })
+            "div",
+            { className: "comments" },
+            comments
           );
         }
       }]);
@@ -37,41 +40,11 @@ Drupal.behaviors.drupal_block_reactive = {
       return CommentBox;
     }(React.Component);
 
-    // CommentList component definition.
-
-
-    var CommentList = function (_React$Component2) {
-      _inherits(CommentList, _React$Component2);
-
-      function CommentList() {
-        _classCallCheck(this, CommentList);
-
-        return _possibleConstructorReturn(this, Object.getPrototypeOf(CommentList).apply(this, arguments));
-      }
-
-      _createClass(CommentList, [{
-        key: 'render',
-        value: function render() {
-          // List of comments to render.
-          var commentNodes = this.props.comments.map(function (comment) {
-            return React.createElement(Comment, { title: comment.title, date: comment.date, key: comment.key });
-          });
-          return React.createElement(
-            'div',
-            { className: 'commentList' },
-            commentNodes
-          );
-        }
-      }]);
-
-      return CommentList;
-    }(React.Component);
-
     // Comment component definition.
 
 
-    var Comment = function (_React$Component3) {
-      _inherits(Comment, _React$Component3);
+    var Comment = function (_React$Component2) {
+      _inherits(Comment, _React$Component2);
 
       function Comment() {
         _classCallCheck(this, Comment);
@@ -80,19 +53,20 @@ Drupal.behaviors.drupal_block_reactive = {
       }
 
       _createClass(Comment, [{
-        key: 'render',
+        key: "render",
         value: function render() {
           return React.createElement(
-            'div',
-            { className: 'comment' },
+            "div",
+            { className: "comment" },
             React.createElement(
-              'span',
-              { className: 'commentTitle' },
+              "span",
+              null,
               this.props.title
             ),
+            " | ",
             React.createElement(
-              'span',
-              { className: 'commentDate' },
+              "span",
+              null,
               this.props.date
             )
           );
@@ -101,7 +75,6 @@ Drupal.behaviors.drupal_block_reactive = {
 
       return Comment;
     }(React.Component);
-
     // Render our component.
 
 
