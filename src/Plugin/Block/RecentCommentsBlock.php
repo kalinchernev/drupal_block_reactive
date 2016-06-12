@@ -20,7 +20,7 @@ class RecentCommentsBlock extends BlockBase {
    */
   public function build() {
     return [
-      '#markup' => 'perhaps fallback',
+      '#markup' => '<div id="reactjs-component">The component</div>',
       '#attached' => [
         'library' => [
           'drupal_block_reactive/recent-comments-reactive',

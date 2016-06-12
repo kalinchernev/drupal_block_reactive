@@ -1,4 +1,6 @@
 recent-comments-reactive:
   version: VERSION
   js:
-    js/dist/health-check.js: {}
+    //cdn.jsdelivr.net/react/15.1.0/react.js: { type: external, minified: false }
+    //cdn.jsdelivr.net/react/15.1.0/react-dom.js: { type: external, minified: false }
+    js/dist/hello.js: {}
