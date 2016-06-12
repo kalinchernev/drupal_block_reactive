@@ -2,37 +2,23 @@ Drupal.behaviors.drupal_block_reactive = {
   attach: (context) => {
 
     // CommentBox component definition.
-    const CommentBox = React.createClass({
-      getInitialState: () => {
-        return {data: []};
-      },
-      render: () => {
+    class CommentBox extends React.Component{
+      render() {
         return (
           <div className="commentBox">
             <CommentList />
           </div>
         );
       }
-    });
+    }
 
     // CommentList component definition.
-    const CommentList = React.createClass({
-      render: () => {
-        const tempComments = [
-          {
-            title: 'INTT-1',
-            date: Date(),
-            key: 1
-          },
-          {
-            title: 'INTT-2',
-            date: Date(),
-            key: 2
-          }
-        ];
+    class CommentList extends React.Component {
+      render() {
+        this.comments = [{title: 'one', date: Date(), key:1}];
 
         // List of comments to render.
-        const commentNodes = tempComments.map((comment) => {
+        const commentNodes = this.comments.map((comment) => {
           return (
             <Comment title={comment.title} key={comment.key}>
               {comment.title}
@@ -46,19 +32,19 @@ Drupal.behaviors.drupal_block_reactive = {
           </div>
         );
       }
-    });
+    }
 
     // Comment component definition.
-    const Comment = React.createClass({
-      render: () => {
+    class Comment extends React.Component {
+      render() {
         return (
           <div className="comment">
-            <span className="commentTitle">title placeholder</span>
-            <span className="commentDate">date placeholder</span>
+            <span className="commentTitle">ph title</span>
+            <span className="commentDate">ph date</span>
           </div>
         );
       }
-    });
+    }
 
     // Render our component.
     ReactDOM.render(
