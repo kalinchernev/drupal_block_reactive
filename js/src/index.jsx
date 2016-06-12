@@ -2,14 +2,19 @@ Drupal.behaviors.drupal_block_reactive = {
   attach: (context) => {
     // CommentBox component definition.
     class CommentBox extends React.Component {
-      render() {
+      _getComments() {
         const commentsList = [
           {title: "one", date: Date(), id: '223'},
           {title: "two", date: Date(), id: '224'}
         ];
-        const comments = commentsList.map((comment) => {
+
+        return commentsList.map((comment) => {
           return <Comment title={comment.title} date={comment.date} key={comment.id}/>
         });
+      }
+
+      render() {
+        const comments = this._getComments();
 
         return (
           <div className="comments">{comments}</div>

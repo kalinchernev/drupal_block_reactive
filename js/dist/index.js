@@ -22,12 +22,18 @@ Drupal.behaviors.drupal_block_reactive = {
       }
 
       _createClass(CommentBox, [{
-        key: "render",
-        value: function render() {
+        key: "_getComments",
+        value: function _getComments() {
           var commentsList = [{ title: "one", date: Date(), id: '223' }, { title: "two", date: Date(), id: '224' }];
-          var comments = commentsList.map(function (comment) {
+
+          return commentsList.map(function (comment) {
             return React.createElement(Comment, { title: comment.title, date: comment.date, key: comment.id });
           });
+        }
+      }, {
+        key: "render",
+        value: function render() {
+          var comments = this._getComments();
 
           return React.createElement(
             "div",
