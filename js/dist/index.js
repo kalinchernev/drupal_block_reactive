@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -23,12 +23,13 @@ Drupal.behaviors.drupal_block_reactive = {
       }
 
       _createClass(CommentBox, [{
-        key: "render",
+        key: 'render',
         value: function render() {
+          var comments = [{ title: 'one', date: Date(), key: 1 }, { title: 'two', date: Date(), key: 2 }];
           return React.createElement(
-            "div",
-            { className: "commentBox" },
-            React.createElement(CommentList, null)
+            'div',
+            { className: 'commentBox' },
+            React.createElement(CommentList, { comments: comments })
           );
         }
       }]);
@@ -49,22 +50,15 @@ Drupal.behaviors.drupal_block_reactive = {
       }
 
       _createClass(CommentList, [{
-        key: "render",
+        key: 'render',
         value: function render() {
-          this.comments = [{ title: 'one', date: Date(), key: 1 }];
-
           // List of comments to render.
-          var commentNodes = this.comments.map(function (comment) {
-            return React.createElement(
-              Comment,
-              { title: comment.title, key: comment.key },
-              comment.title
-            );
+          var commentNodes = this.props.comments.map(function (comment) {
+            return React.createElement(Comment, { title: comment.title, date: comment.date, key: comment.key });
           });
-
           return React.createElement(
-            "div",
-            { className: "commentList" },
+            'div',
+            { className: 'commentList' },
             commentNodes
           );
         }
@@ -86,20 +80,20 @@ Drupal.behaviors.drupal_block_reactive = {
       }
 
       _createClass(Comment, [{
-        key: "render",
+        key: 'render',
         value: function render() {
           return React.createElement(
-            "div",
-            { className: "comment" },
+            'div',
+            { className: 'comment' },
             React.createElement(
-              "span",
-              { className: "commentTitle" },
-              "ph title"
+              'span',
+              { className: 'commentTitle' },
+              this.props.title
             ),
             React.createElement(
-              "span",
-              { className: "commentDate" },
-              "ph date"
+              'span',
+              { className: 'commentDate' },
+              this.props.date
             )
           );
         }

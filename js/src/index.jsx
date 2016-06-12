@@ -4,9 +4,13 @@ Drupal.behaviors.drupal_block_reactive = {
     // CommentBox component definition.
     class CommentBox extends React.Component{
       render() {
+        const comments = [
+          {title: 'one', date: Date(), key:1},
+          {title: 'two', date: Date(), key:2}
+        ];
         return (
           <div className="commentBox">
-            <CommentList />
+            <CommentList comments={comments} />
           </div>
         );
       }
@@ -15,17 +19,12 @@ Drupal.behaviors.drupal_block_reactive = {
     // CommentList component definition.
     class CommentList extends React.Component {
       render() {
-        this.comments = [{title: 'one', date: Date(), key:1}];
-
         // List of comments to render.
-        const commentNodes = this.comments.map((comment) => {
+        const commentNodes = this.props.comments.map((comment) => {
           return (
-            <Comment title={comment.title} key={comment.key}>
-              {comment.title}
-            </Comment>
+            <Comment title={comment.title} date={comment.date} key={comment.key} />
           );
         });
-
         return (
           <div className="commentList">
             {commentNodes}
@@ -39,8 +38,8 @@ Drupal.behaviors.drupal_block_reactive = {
       render() {
         return (
           <div className="comment">
-            <span className="commentTitle">ph title</span>
-            <span className="commentDate">ph date</span>
+            <span className="commentTitle">{this.props.title}</span>
+            <span className="commentDate">{this.props.date}</span>
           </div>
         );
       }
