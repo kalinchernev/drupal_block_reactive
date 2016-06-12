@@ -16,16 +16,14 @@ Drupal.behaviors.drupal_block_reactive = {
 
       componentDidMount() {
         this._fetchData();
-        setInterval(this.fetchData, 2000);
+        setInterval(this._fetchData, this.props.timeInterval);
       }
 
       _fetchData() {
         jQuery.ajax({
           url: this.props.url,
           dataType: 'json',
-          success: (comments) => {
-            this.setState({comments});
-          },
+          success: (comments) => this.setState({comments}),
           error: (xhr, status, err) => {
             console.error(this.props.url, status, err.toString());
           }
@@ -71,7 +69,7 @@ Drupal.behaviors.drupal_block_reactive = {
     }
     // Render our component.
     ReactDOM.render(
-      <CommentBox url='/api/comments' />,
+      <CommentBox url='/api/comments' timeInterval={2000}/>,
       document.getElementById('recent-comments-react')
     );
   }

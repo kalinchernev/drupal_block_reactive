@@ -35,7 +35,7 @@ Drupal.behaviors.drupal_block_reactive = {
         key: 'componentDidMount',
         value: function componentDidMount() {
           this._fetchData();
-          setInterval(this.fetchData, 2000);
+          setInterval(this._fetchData, this.props.timeInterval);
         }
       }, {
         key: '_fetchData',
@@ -46,7 +46,7 @@ Drupal.behaviors.drupal_block_reactive = {
             url: this.props.url,
             dataType: 'json',
             success: function success(comments) {
-              _this2.setState({ comments: comments });
+              return _this2.setState({ comments: comments });
             },
             error: function error(xhr, status, err) {
               console.error(_this2.props.url, status, err.toString());
@@ -130,6 +130,6 @@ Drupal.behaviors.drupal_block_reactive = {
     // Render our component.
 
 
-    ReactDOM.render(React.createElement(CommentBox, { url: '/api/comments' }), document.getElementById('recent-comments-react'));
+    ReactDOM.render(React.createElement(CommentBox, { url: '/api/comments', timeInterval: 2000 }), document.getElementById('recent-comments-react'));
   }
 };
