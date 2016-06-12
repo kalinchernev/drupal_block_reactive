@@ -1,6 +1,16 @@
-recent-comments-reactive:
-  version: VERSION
+recent-comments-reactive.reactjs:
+  remote: https://github.com/facebook/react
+  version: 15.1.0
+  license:
+    name: BSD
+    url: https://github.com/facebook/react/blob/master/LICENSE
+    gpl-compatible: true
   js:
+    # Non-minified version: development friendly, debugging is possible.
     //cdn.jsdelivr.net/react/15.1.0/react.js: { type: external, minified: false }
     //cdn.jsdelivr.net/react/15.1.0/react-dom.js: { type: external, minified: false }
+
+recent-comments-reactive.component:
+  version: VERSION
+  js:
     js/dist/hello.js: {}
