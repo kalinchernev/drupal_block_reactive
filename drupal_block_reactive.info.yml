@@ -6,3 +6,7 @@ version: '8.x-1.x-dev'
 core: '8.x'
 dependencies:
   - block
+  - comment
+  - node
+  - rest
+  - user
