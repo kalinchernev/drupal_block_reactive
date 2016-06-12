@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -18,26 +18,66 @@ Drupal.behaviors.drupal_block_reactive = {
       function CommentBox() {
         _classCallCheck(this, CommentBox);
 
-        return _possibleConstructorReturn(this, Object.getPrototypeOf(CommentBox).apply(this, arguments));
+        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(CommentBox).call(this));
+
+        _this.state = {
+          comments: []
+        };
+        return _this;
       }
 
       _createClass(CommentBox, [{
-        key: "_getComments",
-        value: function _getComments() {
-          var commentsList = [{ title: "one", date: Date(), id: '223' }, { title: "two", date: Date(), id: '224' }];
+        key: 'componentDidMount',
+        value: function componentDidMount() {
+          var _this2 = this;
 
-          return commentsList.map(function (comment) {
-            return React.createElement(Comment, { title: comment.title, date: comment.date, key: comment.id });
+          this.serverRequest = jQuery.ajax({
+            url: '/api/comments',
+            dataType: 'json',
+            success: function success(comments) {
+              _this2.setState({ comments: comments });
+            },
+            error: function error(xhr, status, err) {
+              console.error('/api/comments', status, err.toString());
+            }
           });
         }
       }, {
-        key: "render",
+        key: 'componentWillUnmount',
+        value: function componentWillUnmount() {
+          this.serverRequest.abort();
+        }
+
+        // Private method gets data from state and returns array of components.
+
+      }, {
+        key: '_getComments',
+        value: function _getComments() {
+          // Get the list of comments from the state.
+          var commentsList = this.state.comments;
+          // Return an array of sub-components.
+          if (commentsList.length > 0) {
+            return commentsList.map(function (comment) {
+              return React.createElement(Comment, {
+                subject: comment.subject,
+                changed: comment.changed,
+                key: comment.cid
+              });
+            });
+          }
+          return React.createElement(
+            'p',
+            null,
+            Drupal.t('No comments.')
+          );
+        }
+      }, {
+        key: 'render',
         value: function render() {
           var comments = this._getComments();
-
           return React.createElement(
-            "div",
-            { className: "comments" },
+            'div',
+            { className: 'comments' },
             comments
           );
         }
@@ -59,21 +99,21 @@ Drupal.behaviors.drupal_block_reactive = {
       }
 
       _createClass(Comment, [{
-        key: "render",
+        key: 'render',
         value: function render() {
           return React.createElement(
-            "div",
-            { className: "comment" },
+            'div',
+            { className: 'comment' },
             React.createElement(
-              "span",
+              'span',
               null,
-              this.props.title
+              this.props.subject
             ),
-            " | ",
+            ' | ',
             React.createElement(
-              "span",
+              'span',
               null,
-              this.props.date
+              this.props.changed
             )
           );
         }
