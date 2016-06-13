@@ -1,4 +1,4 @@
-recent-comments-reactive.reactjs:
+reactjs:
   remote: https://github.com/facebook/react
   version: 15.1.0
   license:
@@ -10,7 +10,7 @@ recent-comments-reactive.reactjs:
     //cdn.jsdelivr.net/react/15.1.0/react.js: { type: external, minified: false }
     //cdn.jsdelivr.net/react/15.1.0/react-dom.js: { type: external, minified: false }
 
-recent-comments-reactive.component:
+component:
   version: VERSION
   js:
     js/dist/index.js: {}

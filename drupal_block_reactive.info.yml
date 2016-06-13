@@ -1,6 +1,6 @@
 name: Recent comments (React)
 type: module
-description: 'Showing latest comments in a reactive way.'
+description: 'Latest comments block with React.js'
 package: Development
 version: '8.x-1.x-dev'
 core: '8.x'

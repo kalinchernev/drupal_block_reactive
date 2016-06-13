@@ -5,10 +5,11 @@
 
 Drupal.behaviors.drupal_block_reactive = {
   attach: (context) => {
-    // CommentBox component definition.
+    // CommentBox component.
     class CommentBox extends React.Component {
       constructor() {
         super();
+        // Setting initial state.
         this.state = {
           comments: []
         }
@@ -24,7 +25,6 @@ Drupal.behaviors.drupal_block_reactive = {
           }
         });
       }
-
       // Gets data from state, returns a list components.
       _getComments() {
         // Get the list of comments from the state.
@@ -52,18 +52,17 @@ Drupal.behaviors.drupal_block_reactive = {
       render() {
         const commentsNodes = this._getComments();
         return (
-          <div className="comments">
+          <div className="CommentBox">
             {commentsNodes}
           </div>
         );
       }
     }
-
-    // Comment component definition.
+    // Comment component.
     class Comment extends React.Component {
       render() {
         return (
-          <div className="comment">
+          <div className="Comment">
             <span>{this.props.subject}</span> | <span>{this.props.changed}</span>
           </div>
         );

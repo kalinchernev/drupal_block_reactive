@@ -15,13 +15,15 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 Drupal.behaviors.drupal_block_reactive = {
   attach: function attach(context) {
-    // CommentBox component definition.
+    // CommentBox component.
 
     var CommentBox = function (_React$Component) {
       _inherits(CommentBox, _React$Component);
 
       function CommentBox() {
         _classCallCheck(this, CommentBox);
+
+        // Setting initial state.
 
         var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(CommentBox).call(this));
 
@@ -49,7 +51,6 @@ Drupal.behaviors.drupal_block_reactive = {
             }
           });
         }
-
         // Gets data from state, returns a list components.
 
       }, {
@@ -85,7 +86,7 @@ Drupal.behaviors.drupal_block_reactive = {
           var commentsNodes = this._getComments();
           return React.createElement(
             'div',
-            { className: 'comments' },
+            { className: 'CommentBox' },
             commentsNodes
           );
         }
@@ -93,8 +94,7 @@ Drupal.behaviors.drupal_block_reactive = {
 
       return CommentBox;
     }(React.Component);
-
-    // Comment component definition.
+    // Comment component.
 
 
     var Comment = function (_React$Component2) {
@@ -111,7 +111,7 @@ Drupal.behaviors.drupal_block_reactive = {
         value: function render() {
           return React.createElement(
             'div',
-            { className: 'comment' },
+            { className: 'Comment' },
             React.createElement(
               'span',
               null,

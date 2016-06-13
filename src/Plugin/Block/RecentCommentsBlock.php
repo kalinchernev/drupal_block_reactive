@@ -23,8 +23,8 @@ class RecentCommentsBlock extends BlockBase {
       '#markup' => '<div id="recent-comments-react"></div>',
       '#attached' => [
         'library' => [
-          'drupal_block_reactive/recent-comments-reactive.reactjs',
-          'drupal_block_reactive/recent-comments-reactive.component',
+          'drupal_block_reactive/reactjs',
+          'drupal_block_reactive/component',
         ],
       ],
     ];
