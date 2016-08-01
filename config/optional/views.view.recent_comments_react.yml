@@ -1,4 +1,3 @@
-uuid: 2fb77c78-3784-4055-b586-a3953e1b6340
 langcode: en
 status: true
 dependencies:
@@ -7,8 +6,6 @@ dependencies:
     - node
     - rest
     - user
-_core:
-  default_config_hash: jmfZ73IDUpneecqVXUK3whGzTcvwLBBll9U3ZTCzndo
 id: recent_comments_react
 label: 'Recent comments react'
 module: views
